@@ -55,7 +55,7 @@ def visualize_weights(
 def visualize_activations(
     network: LayersSequence,
     inds_to_visualize: list[int],
-    X: npt.NDArray[np.float_],
+    X: npt.NDArray[np.float64],
     ncols: int = 3,
     title: str = "Network activations",
 ) -> None:

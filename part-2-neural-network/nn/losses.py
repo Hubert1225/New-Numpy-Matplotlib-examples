@@ -17,13 +17,13 @@ class MeansSquareLoss(LossFunction):
     """
 
     def __call__(
-        self, Y_pred: npt.NDArray[np.float_], Y_true: npt.NDArray[np.float_ | np.int_]
+        self, Y_pred: npt.NDArray[np.float64], Y_true: npt.NDArray[np.float64 | np.int_]
     ) -> float:
         return np.sum(np.power(Y_pred - Y_true, 2))
 
     def differentiate(
-        self, Y_pred: npt.NDArray[np.float_], Y_true: npt.NDArray[np.float_ | np.int_]
-    ) -> float | npt.NDArray[np.float_]:
+        self, Y_pred: npt.NDArray[np.float64], Y_true: npt.NDArray[np.float64 | np.int_]
+    ) -> float | npt.NDArray[np.float64]:
         return 2 * (Y_pred - Y_true)
 
 
@@ -34,7 +34,7 @@ class CrossEntropyLoss(LossFunction):
     """
 
     def __call__(
-        self, Y_pred: npt.NDArray[np.float_], Y_true: npt.NDArray[np.float_ | np.int_]
+        self, Y_pred: npt.NDArray[np.float64], Y_true: npt.NDArray[np.float64 | np.int_]
     ) -> float:
         """Calculates cross entropy loss for `C`-classes
         classification problem
@@ -66,8 +66,8 @@ class CrossEntropyLoss(LossFunction):
         return -1 * np.sum(np.log(Y_pred[true_classes_mask] + eps))
 
     def differentiate(
-        self, Y_pred: npt.NDArray[np.float_], Y_true: npt.NDArray[np.float_ | np.int_]
-    ) -> float | npt.NDArray[np.float_]:
+        self, Y_pred: npt.NDArray[np.float64], Y_true: npt.NDArray[np.float64 | np.int_]
+    ) -> float | npt.NDArray[np.float64]:
         """Calculates cross entropy loss gradient
         for `C`-classes classification problem
 

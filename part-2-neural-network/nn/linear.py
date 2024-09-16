@@ -35,18 +35,18 @@ class LinearLayer(Layer):
         self.last_X_: npt.NDArray | None = None
         super().__init__()
 
-    def _initialize_params(self, *args, **kwargs) -> dict[str, npt.NDArray[np.float_]]:
+    def _initialize_params(self, *args, **kwargs) -> dict[str, npt.NDArray[np.float64]]:
         weights = np.random.uniform(
             low=-1.0, high=1.0, size=(self.n_inputs, self.n_outputs)
         )
         biases = np.random.uniform(low=-3.0, high=3.0, size=(self.n_outputs,))
         return {"weights": weights, "biases": biases}
 
-    def forward(self, X: npt.NDArray[np.float_]) -> npt.NDArray[np.float_]:
+    def forward(self, X: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
         self.last_X_ = X
         return np.matmul(X, self.params_["weights"]) + self.params_["biases"]
 
-    def backward(self, dY: npt.NDArray[np.float_]) -> npt.NDArray[np.float_]:
+    def backward(self, dY: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
         # dw_ij = x_i * d_j
         # if there's more dimensions, they are averaged
         d_weights = np.matmul(

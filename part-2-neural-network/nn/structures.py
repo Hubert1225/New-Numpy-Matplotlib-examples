@@ -20,12 +20,12 @@ class Layer(ABC):
     ----------
     name : str
         The name of the layer type
-    params_ : dict[str, npt.NDArray[np.float_]]
+    params_ : dict[str, npt.NDArray[np.float64]]
         The dict storing values of layer parameters,
         keys are strings with names of parameters
         and values are NumPy arrays containing values
         of parameters
-    grads_ : dict[str, npt.NDArray[np.float_]]
+    grads_ : dict[str, npt.NDArray[np.float64]]
         The dict storing gradient values for each parameter,
         the set of keys is always the same as set of keys
         of params_ dict,
@@ -39,12 +39,12 @@ class Layer(ABC):
     name: str
 
     @abstractmethod
-    def _initialize_params(self, *args, **kwargs) -> dict[str, npt.NDArray[np.float_]]:
+    def _initialize_params(self, *args, **kwargs) -> dict[str, npt.NDArray[np.float64]]:
         """Creates values to initialize self.params_ dict
 
         Returns
         -------
-        dict[str, npt.NDArray[np.float_]]
+        dict[str, npt.NDArray[np.float64]]
             The dict which keys should be strings (names of parameters)
             and for each key the value should be NumPy array with initial
             values of the parameter
@@ -52,16 +52,16 @@ class Layer(ABC):
         pass
 
     def __init__(self, *args, **kwargs):
-        self.params_: dict[str, npt.NDArray[np.float_]] = self._initialize_params(
+        self.params_: dict[str, npt.NDArray[np.float64]] = self._initialize_params(
             *args, **kwargs
         )
-        self.grads_: dict[str, npt.NDArray[np.float_]] = {
+        self.grads_: dict[str, npt.NDArray[np.float64]] = {
             param_name: np.zeros_like(param_arr)
             for param_name, param_arr in self.params_.items()
         }
 
     @abstractmethod
-    def forward(self, X: npt.NDArray[np.float_]) -> npt.NDArray[np.float_]:
+    def forward(self, X: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
         """Performs forward propagation of the layer
         on the input data
         X -> Y
@@ -80,7 +80,7 @@ class Layer(ABC):
         pass
 
     @abstractmethod
-    def backward(self, dY: npt.NDArray[np.float_]) -> npt.NDArray[np.float_]:
+    def backward(self, dY: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
         """Given the gradient of layer's output, performs
         gradient backpropagation.
 
@@ -142,7 +142,7 @@ class LayersSequence:
     def __init__(self, layers: list[Layer]):
         self.layers = layers
 
-    def forward(self, X: npt.NDArray[np.float_]) -> npt.NDArray[np.float_]:
+    def forward(self, X: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
         """Performs forward propagation on layers sequentially.
 
         The output of layer at index i in `self.layers` is the input
@@ -166,7 +166,7 @@ class LayersSequence:
             Y = layer.forward(Y)
         return Y
 
-    def backward(self, dY: npt.NDArray[np.float_]) -> npt.NDArray[np.float_]:
+    def backward(self, dY: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
         """Performs backward propagation on the sequence
         of layers
 
@@ -214,7 +214,7 @@ class LossFunction(ABC):
 
     @abstractmethod
     def __call__(
-        self, Y_pred: npt.NDArray[np.float_], Y_true: npt.NDArray[np.float_ | np.int_]
+        self, Y_pred: npt.NDArray[np.float64], Y_true: npt.NDArray[np.float64 | np.int_]
     ) -> float:
         """Returns loss value
 
@@ -242,8 +242,8 @@ class LossFunction(ABC):
 
     @abstractmethod
     def differentiate(
-        self, Y_pred: npt.NDArray[np.float_], Y_true: npt.NDArray[np.float_ | np.int_]
-    ) -> float | npt.NDArray[np.float_]:
+        self, Y_pred: npt.NDArray[np.float64], Y_true: npt.NDArray[np.float64 | np.int_]
+    ) -> float | npt.NDArray[np.float64]:
         """Calculates the loss function gradient over predicted
         values
 

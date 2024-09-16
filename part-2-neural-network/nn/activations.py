@@ -14,18 +14,18 @@ class SigmoidActivation(Layer):
 
     name = "sigmoid"
 
-    def _initialize_params(self, *args, **kwargs) -> dict[str, npt.NDArray[np.float_]]:
+    def _initialize_params(self, *args, **kwargs) -> dict[str, npt.NDArray[np.float64]]:
         return dict()
 
     def __init__(self):
         super().__init__()
         self.last_activation_: float | npt.NDArray[np.float] | None = None
 
-    def forward(self, X: npt.NDArray[np.float_]) -> npt.NDArray[np.float_]:
+    def forward(self, X: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
         self.last_activation_ = np.exp(X) / (np.exp(X) + 1)
         return self.last_activation_
 
-    def backward(self, dY: npt.NDArray[np.float_]) -> npt.NDArray[np.float_]:
+    def backward(self, dY: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
         return dY * self.last_activation_ * (1 - self.last_activation_)
 
 
@@ -42,18 +42,18 @@ class ReLUActivation(Layer):
 
     name = "ReLU"
 
-    def _initialize_params(self, *args, **kwargs) -> dict[str, npt.NDArray[np.float_]]:
+    def _initialize_params(self, *args, **kwargs) -> dict[str, npt.NDArray[np.float64]]:
         return dict()
 
     def __init__(self):
         super().__init__()
         self.last_mask_: npt.NDArray[np.float] | None = None
 
-    def forward(self, X: npt.NDArray[np.float_]) -> npt.NDArray[np.float_]:
+    def forward(self, X: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
         self.last_mask_ = (X > 0).astype("int8")
         return X * self.last_mask_
 
-    def backward(self, dY: npt.NDArray[np.float_]) -> npt.NDArray[np.float_]:
+    def backward(self, dY: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
         return self.last_mask_.astype("float") * dY
 
 
@@ -67,19 +67,19 @@ class SoftmaxActivation(Layer):
 
     name = "softmax"
 
-    def _initialize_params(self, *args, **kwargs) -> dict[str, npt.NDArray[np.float_]]:
+    def _initialize_params(self, *args, **kwargs) -> dict[str, npt.NDArray[np.float64]]:
         return dict()
 
     def __init__(self):
         super().__init__()
         self.last_activation_: float | npt.NDArray[np.float] | None = None
 
-    def forward(self, X: npt.NDArray[np.float_]) -> npt.NDArray[np.float_]:
+    def forward(self, X: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
         X_exps = np.exp(X)
         self.last_activation_ = X_exps / np.sum(X_exps, axis=-1, keepdims=True)
         return self.last_activation_
 
-    def backward(self, dY: npt.NDArray[np.float_]) -> npt.NDArray[np.float_]:
+    def backward(self, dY: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
         # stack of derivatives matrices
         # matrix element [i,j] - d(activation_i)/d(input_j)
         # = -y_i*y_j if i != j
