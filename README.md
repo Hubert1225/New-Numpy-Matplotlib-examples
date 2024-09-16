@@ -28,6 +28,22 @@ an introduction to these packages
 2. **Neural network** - a framework to build and train neural networks, written in
 pure NumPy, along with some experiments and visualizations
 
+## How to run
+
+1. Install packages:
+
+```commandline
+pip install -r requirements.txt
+```
+
+2. Run Jupyter Lab web environment:
+
+```commandline
+jupyter lab
+```
+
+3. In Jupyter Lab, navigate to the notebook you'd like to run.
+
 ## Utilized datasets
 
 **Iris**
