@@ -9,4 +9,4 @@ A set of exemplary programs utilizing well-known Python libraries: NumPy and Mat
 
 Fisher, R. (1936). Iris [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C56C76.
 
-Link to page: https://archive.ics.uci.edu/dataset/53/iris
+Link to the page: https://archive.ics.uci.edu/dataset/53/iris
