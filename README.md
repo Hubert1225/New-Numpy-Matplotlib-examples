@@ -9,7 +9,7 @@ A set of exemplary programs utilizing well-known Python libraries: NumPy and Mat
 
 ## About the project
 
-New Numpy-Matplotlib Examples is - as name suggests - a set
+New Numpy-Matplotlib Examples is - as the name suggests - a set
 of exemplary programs exploring great capabilities of two fundamental
 Python libraries: NumPy and Matplotlib.
 
