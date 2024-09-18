@@ -1,5 +1,11 @@
 numpy
 matplotlib
-ipympl
+
+# code running environment
 jupyterlab
+
+# necessary for Matplotlib to work in JupyterLab
+ipympl
+
+# code formatting
 black
