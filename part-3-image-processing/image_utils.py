@@ -19,4 +19,4 @@ def rgb2gray(rgb: npt.NDArray[np.uint8]) -> npt.NDArray[np.uint8]:
         image in grayscale
 
     """
-    return np.dot(rgb[..., :3], [0.299, 0.587, 0.144])
+    return np.dot(rgb[..., :3], [0.299, 0.587, 0.144]).astype(np.uint8)
