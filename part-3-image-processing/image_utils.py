@@ -42,15 +42,11 @@ def rotate_image(image: npt.NDArray[np.uint8], phi: float) -> npt.NDArray[np.uin
     """
 
     # rotation matrix
-    R = np.array(
-        [[np.cos(phi), np.sin(phi)],
-         [-np.sin(phi), np.cos(phi)]
-         ]
-    )
+    R = np.array([[np.cos(phi), np.sin(phi)], [-np.sin(phi), np.cos(phi)]])
 
     # obtain grid of pixels' coordinates
     n_rows, n_cols = image.shape[:3]
-    x, y = np.meshgrid(np.arange(n_rows), np.arange(n_cols), indexing='ij')
+    x, y = np.meshgrid(np.arange(n_rows), np.arange(n_cols), indexing="ij")
     coord = np.stack((x, y)).astype(np.int32)
     coord = np.expand_dims(np.transpose(coord, (1, 2, 0)), axis=-1)
 
