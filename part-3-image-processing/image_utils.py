@@ -51,7 +51,7 @@ def rotate_image(image: npt.NDArray[np.uint8], phi: float) -> npt.NDArray[np.uin
     coord = np.expand_dims(np.transpose(coord, (1, 2, 0)), axis=-1)
 
     # obtain coordinates of rotated image
-    coord_rot = np.matmul(R, coord)
+    coord_rot = np.matmul(R, coord).astype(np.int32)
     x_rot = coord_rot[:, :, 0]
     y_rot = coord_rot[:, :, 1]
 
