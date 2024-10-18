@@ -77,3 +77,75 @@ def rotate_image(image: npt.NDArray[np.uint8], phi: float) -> npt.NDArray[np.uin
     output[invalid_coords] = 0
 
     return np.squeeze(output)
+
+
+def conv2d(
+    image: npt.NDArray[np.uint8], kernel: npt.NDArray[np.float64]
+) -> npt.NDArray[np.uint8]:
+    """Performs 2D convolution on given image
+    and given kernel
+
+    If the image has shape (n,m) and the kernel has shape (n_k, m_k),
+    then the output shape will be (n - n_k + 1, m - m_k + 1).
+
+    Parameters
+    ----------
+    image: 2D array
+        image to be convolved
+    kernel: 2D array
+        convolution kernel
+
+    Returns
+    -------
+    2D array: convolved image
+
+    Notes
+    -----
+    This is not the most efficient way to compute this;
+    for more efficient ways, see:
+    https://stackoverflow.com/questions/43086557/convolve2d-just-by-using-numpy
+
+    """
+
+    # convert image to np.float64
+    image = image.astype(np.float64)
+
+    # create 4D array of shape (n_k, m_k, n, m),
+    # where (n, m) - shape of the image,
+    #       (n_k, m_k) - shape of the kernel,
+    # which can be thought as a matrix of the same shape as kernel,
+    # which contains a copy of the image in each cell
+    image_reshaped = image.reshape((1, 1, image.shape[0], image.shape[1]))
+    image_repeated = np.repeat(
+        np.repeat(image_reshaped, kernel.shape[0], 0), kernel.shape[1], 1
+    )
+
+    # multiply all values in each cell by the value
+    # of the corresponding kernel's cell
+    image_repeated_weighted = image_repeated * kernel.reshape(
+        kernel.shape[0], kernel.shape[1], 1, 1
+    )
+
+    # allocate output image
+    output_image = np.zeros(np.subtract(image.shape, kernel.shape) + 1)
+
+    # compute convolution
+
+    # the image's copy from the cell [i, j] contribute
+    # but without rows at indexes: 0, 1, ..., i-1 and n - n_k + 1 + i, ... n - 1
+    # and without columns at indexes: 0, 1, ..., j-1 and m - m_k + 1 + j, ..., m - 1
+    n_rows, n_cols = image.shape
+    for i in range(kernel.shape[0]):
+        for j in range(kernel.shape[1]):
+            output_image = (
+                output_image
+                + image_repeated_weighted[
+                    i,
+                    j,
+                    i : (n_rows - kernel.shape[0] + i + 1),
+                    j : (n_cols - kernel.shape[1] + j + 1),
+                ]
+            )
+
+    # return image converted back to np.uint8
+    return output_image.astype(np.uint8)
