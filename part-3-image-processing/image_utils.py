@@ -77,7 +77,7 @@ def rotate_image(image: npt.NDArray[np.uint8], phi: float) -> npt.NDArray[np.uin
 
 
 def conv2d(
-    image: npt.NDArray[np.uint8], kernel: npt.NDArray[np.float64]
+    image: npt.NDArray[np.uint8], kernel: npt.NDArray[np.float64], convert_to_uint8: bool = True,
 ) -> npt.NDArray[np.uint8]:
     """Performs 2D convolution on given image
     and given kernel
@@ -91,6 +91,9 @@ def conv2d(
         image to be convolved
     kernel: 2D array
         convolution kernel
+    convert_to_uint8: bool
+        whether to return the result array of type np.uint8
+        (array of type np.float64 is returned otherwise)
 
     Returns
     -------
@@ -145,7 +148,9 @@ def conv2d(
             )
 
     # return image converted back to np.uint8
-    return output_image.astype(np.uint8)
+    if convert_to_uint8:
+        output_image = output_image.astype(np.uint8)
+    return output_image
 
 
 def gaussian2d_pdf(
