@@ -165,3 +165,34 @@ def gaussian2d_pdf(
             (-1/2) * np.matmul(np.matmul(x - mu, np.linalg.inv(sigma)), (x - mu).reshape(-1, 1))
         )
      )
+
+
+def detect_edges(image: np.ndarray, denoising_filter: np.ndarray) -> np.ndarray:
+
+    # step 1: if RGB image, convert to grayscale
+    if image.ndim == 3:
+        image = rgb2gray(image)
+
+    # step 2: filtering
+    image_filtered = conv2d(image, denoising_filter)
+
+    # step 3: vertical edge detection
+    vertical_kernel = np.array([
+        [-1, 0, 1],
+        [-1, 0, 1],
+        [-1, 0, 1]
+    ])
+    vertical_edges = np.abs(conv2d(image_filtered, vertical_kernel))
+
+    # step 4: horizontal edge detection
+    horizontal_kernel = np.array([
+        [1, 1, 1],
+        [0, 0, 0],
+        [-1, -1, -1]
+    ])
+    horizontal_edges = np.abs(conv2d(image_filtered, horizontal_kernel))
+
+    # step 5: sum up results from vertical direction and horizontal direction
+    edges = vertical_edges + horizontal_edges
+
+    return edges.astype(np.uint8)
