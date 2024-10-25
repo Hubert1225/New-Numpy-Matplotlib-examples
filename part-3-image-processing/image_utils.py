@@ -5,9 +5,6 @@ import numpy.typing as npt
 def rgb2gray(rgb: npt.NDArray[np.uint8]) -> npt.NDArray[np.uint8]:
     """Converts an RGB image to grayscale
 
-    Function adapted from
-    https://www.askpython.com/python-modules/matplotlib/convert-rgb-to-grayscale
-
     Parameters
     ----------
     rgb : 3D array
