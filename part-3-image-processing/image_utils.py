@@ -146,3 +146,17 @@ def conv2d(
 
     # return image converted back to np.uint8
     return output_image.astype(np.uint8)
+
+
+def gaussian2d_pdf(
+    x: np.ndarray,
+    mu: np.ndarray = np.array([0, 0]),
+    sigma: np.ndarray = np.array([[1,0],[0,1]])
+) -> float:
+    return float(
+        (1 / 2 * np.pi) *
+        (1 / np.sqrt(np.linalg.det(sigma)))*
+        np.exp(
+            (-1/2) * np.matmul(np.matmul(x - mu, np.linalg.inv(sigma)), (x - mu).reshape(-1, 1))
+        )
+     )
