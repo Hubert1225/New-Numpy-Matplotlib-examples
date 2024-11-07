@@ -182,7 +182,7 @@ def detect_edges(image: np.ndarray, denoising_filter: np.ndarray) -> np.ndarray:
         [-1, 0, 1],
         [-1, 0, 1]
     ])
-    vertical_edges = np.abs(conv2d(image_filtered, vertical_kernel))
+    vertical_edges = np.abs(conv2d(image_filtered, vertical_kernel, convert_to_uint8=False))
 
     # step 4: horizontal edge detection
     horizontal_kernel = np.array([
@@ -190,9 +190,11 @@ def detect_edges(image: np.ndarray, denoising_filter: np.ndarray) -> np.ndarray:
         [0, 0, 0],
         [-1, -1, -1]
     ])
-    horizontal_edges = np.abs(conv2d(image_filtered, horizontal_kernel))
+    horizontal_edges = np.abs(conv2d(image_filtered, horizontal_kernel, convert_to_uint8=False))
 
     # step 5: sum up results from vertical direction and horizontal direction
+    # and normalize values to the interval [0; 255]
     edges = vertical_edges + horizontal_edges
+    edges = (edges - np.amax(edges)) / (np.amax(edges) - np.amin(edges)) * 255
 
     return edges.astype(np.uint8)
