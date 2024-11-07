@@ -77,7 +77,9 @@ def rotate_image(image: npt.NDArray[np.uint8], phi: float) -> npt.NDArray[np.uin
 
 
 def conv2d(
-    image: npt.NDArray[np.uint8], kernel: npt.NDArray[np.float64], convert_to_uint8: bool = True,
+    image: npt.NDArray[np.uint8],
+    kernel: npt.NDArray[np.float64],
+    convert_to_uint8: bool = True,
 ) -> npt.NDArray[np.uint8]:
     """Performs 2D convolution on given image
     and given kernel
@@ -156,15 +158,18 @@ def conv2d(
 def gaussian2d_pdf(
     x: np.ndarray,
     mu: np.ndarray = np.array([0, 0]),
-    sigma: np.ndarray = np.array([[1,0],[0,1]])
+    sigma: np.ndarray = np.array([[1, 0], [0, 1]]),
 ) -> float:
     return float(
-        (1 / 2 * np.pi) *
-        (1 / np.sqrt(np.linalg.det(sigma)))*
-        np.exp(
-            (-1/2) * np.matmul(np.matmul(x - mu, np.linalg.inv(sigma)), (x - mu).reshape(-1, 1))
+        (1 / 2 * np.pi)
+        * (1 / np.sqrt(np.linalg.det(sigma)))
+        * np.exp(
+            (-1 / 2)
+            * np.matmul(
+                np.matmul(x - mu, np.linalg.inv(sigma)), (x - mu).reshape(-1, 1)
+            )
         )
-     )
+    )
 
 
 def detect_edges(image: np.ndarray, denoising_filter: np.ndarray) -> np.ndarray:
@@ -177,20 +182,16 @@ def detect_edges(image: np.ndarray, denoising_filter: np.ndarray) -> np.ndarray:
     image_filtered = conv2d(image, denoising_filter)
 
     # step 3: vertical edge detection
-    vertical_kernel = np.array([
-        [-1, 0, 1],
-        [-1, 0, 1],
-        [-1, 0, 1]
-    ])
-    vertical_edges = np.abs(conv2d(image_filtered, vertical_kernel, convert_to_uint8=False))
+    vertical_kernel = np.array([[-1, 0, 1], [-1, 0, 1], [-1, 0, 1]])
+    vertical_edges = np.abs(
+        conv2d(image_filtered, vertical_kernel, convert_to_uint8=False)
+    )
 
     # step 4: horizontal edge detection
-    horizontal_kernel = np.array([
-        [1, 1, 1],
-        [0, 0, 0],
-        [-1, -1, -1]
-    ])
-    horizontal_edges = np.abs(conv2d(image_filtered, horizontal_kernel, convert_to_uint8=False))
+    horizontal_kernel = np.array([[1, 1, 1], [0, 0, 0], [-1, -1, -1]])
+    horizontal_edges = np.abs(
+        conv2d(image_filtered, horizontal_kernel, convert_to_uint8=False)
+    )
 
     # step 5: sum up results from vertical direction and horizontal direction
     # and normalize values to the interval [0; 255]
