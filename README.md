@@ -34,7 +34,6 @@ pip install numpy matplotlib
 
 Then, you can just import desired utilities, for example:
 
-
 ```bash
 PYTHONPATH=$(pwd)/part-2-neural-network python3
 ```
