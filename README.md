@@ -1,5 +1,7 @@
 # New-Numpy-Matplotlib-examples
-A set of exemplary programs utilizing well-known Python libraries: NumPy and Matplotlib, to experiment with them and discover their capabilities.
+Hi, there!, Your visit in this repository is your first step to dive
+into two Python libraries of  a great importance - NumPy and Matplotlib -
+_very_ deeply.
 
 <p align="center">
   <img src="img/grid.png" />
