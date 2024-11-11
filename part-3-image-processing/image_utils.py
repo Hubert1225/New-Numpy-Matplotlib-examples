@@ -173,6 +173,27 @@ def gaussian2d_pdf(
 
 
 def detect_edges(image: np.ndarray, denoising_filter: np.ndarray) -> np.ndarray:
+    """Given an image, produces the edge image (pixels intensity
+    corresponds to the possibility of an edge presence)
+
+    If given a 3-channel image, the image is converted to grayscale.
+    Before the edge detection, the image is denoised using the given denoising
+    filter.
+    Edges are detected by summing up absolute values of horizontal
+    and vertical gradients at each pixel.
+
+    Parameters
+    ----------
+    image: 2D or 3D array
+        image to detect edges in
+    denoising_filter: 2D array
+        denoising convolution kernel
+
+    Returns
+    -------
+    2D array: edge image
+
+    """
 
     # step 1: if RGB image, convert to grayscale
     if image.ndim == 3:
