@@ -20,7 +20,7 @@ use ONLY these two packages (however, a few more packages need to be installed,
 e.g. JupyterLab as the environment to present the code working, and ipympl
 for Matplotlib to work in JupyterLab).
 
-## Parts of the project
+## Project modules
 
 The project consists of the following parts:
 
