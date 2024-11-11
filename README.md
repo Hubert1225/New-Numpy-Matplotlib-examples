@@ -29,6 +29,8 @@ fundamental features presentation; materials from this part may well be used as
 an introduction to these packages
 2. **Neural network** - a framework to build and train neural networks, written in
 pure NumPy, along with some experiments and visualizations
+3. **Image processing** - Computer Vision examples, including channels manipulation, 
+images transformations and edge detection
 
 ## How to run
 
