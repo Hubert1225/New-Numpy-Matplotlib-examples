@@ -72,7 +72,7 @@ jupyter lab
 
 - use `requirements.txt`
 
-You also may just use `requirements.txt`. This will install all four libraries
+You may also just use `requirements.txt`. This will install all four libraries
 mentioned above plus `black`, which you can use to format your code.
 
 ```commandline
