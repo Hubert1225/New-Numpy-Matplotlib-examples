@@ -20,18 +20,6 @@ use ONLY these two packages (however, a few more packages need to be installed,
 e.g. JupyterLab as the environment to present the code working, and ipympl
 for Matplotlib to work in JupyterLab).
 
-## Project modules
-
-The project consists of the following parts:
-
-1. **Basics** - notebooks with explanation of basics of NumPy and Matplotlib and
-fundamental features presentation; materials from this part may well be used as
-an introduction to these packages
-2. **Neural network** - a framework to build and train neural networks, written in
-pure NumPy, along with some experiments and visualizations
-3. **Image processing** - Computer Vision examples, including channels manipulation, 
-images transformations and edge detection
-
 ## How to run
 
 - code in `.py` files
@@ -91,6 +79,18 @@ mentioned above plus `black`, which you can use to format your code.
 ```commandline
 pip install -r requirements.txt
 ```
+
+## Project modules
+
+The project consists of the following parts:
+
+1. **Basics** - notebooks with explanation of basics of NumPy and Matplotlib and
+fundamental features presentation; materials from this part may well be used as
+an introduction to these packages
+2. **Neural network** - a framework to build and train neural networks, written in
+pure NumPy, along with some experiments and visualizations
+3. **Image processing** - Computer Vision examples, including channels manipulation, 
+images transformations and edge detection
 
 ## Utilized datasets
 
