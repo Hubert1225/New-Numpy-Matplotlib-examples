@@ -53,3 +53,12 @@ Fisher, R. (1936). Iris [Dataset]. UCI Machine Learning Repository. https://doi.
 Link to the page: https://archive.ics.uci.edu/dataset/53/iris
 
 License: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/legalcode)
+
+**Images**
+
+ - lviv.jpg - _Lviv, Wały Hetmańskie avenue, ca 1900_,
+source: _Album pamiątkowy miasta Lwowa_, Józef Pitułko, 1904,
+https://commons.wikimedia.org/wiki/File:Lwow_Waly_Hetmanskie_c1900.jpg?uselang=pl#file,
+license: public domain
+ - prague.jpg - _Prague Castle_, source: https://www.publicdomainpictures.net/pl/view-image.php?image=218&picture=zamek-praski,
+license: [CC0 Public Domain](http://creativecommons.org/publicdomain/zero/1.0/)
