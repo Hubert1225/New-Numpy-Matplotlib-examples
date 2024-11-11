@@ -72,7 +72,7 @@ jupyter lab
 
 - use `requirements.txt`
 
-You also may just use `requirements.txt`. This will install all four libraries
+You may also just use `requirements.txt`. This will install all four libraries
 mentioned above plus `black`, which you can use to format your code.
 
 ```commandline
@@ -89,7 +89,7 @@ an introduction to these packages
 2. **Neural network** - a framework to build and train neural networks, written in
 pure NumPy, along with some experiments and visualizations
 3. **Image processing** - Computer Vision examples, including channels manipulation, 
-images transformations and edge detection
+image transformations and edge detection
 
 ## Utilized datasets
 
